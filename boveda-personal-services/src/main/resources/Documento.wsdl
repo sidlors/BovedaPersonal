@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+      targetNamespace="http://ws.bp.cit.imss.gob.mx/DocumentoWS"
+	  xmlns:tns="http://ws.bp.cit.imss.gob.mx/DocumentoWS"
+      xmlns:xsd1="http://ws.bp.cit.imss.gob.mx/"
+	  xmlns="http://schemas.xmlsoap.org/wsdl/"
+      xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+   <types>
+      <xsd:schema>
+         <xsd:import namespace="http://ws.bp.cit.imss.gob.mx/"
+                     schemaLocation="Documento.xsd"/>
+      </xsd:schema>
+   </types>
+   
+   <message name="CreateDocumentRequest">
+      <part name="body" element="xsd1:CreateDocumentRequest"/>
+   </message>
+
+   <message name="CreateDocumentResponse">
+      <part name="body" element="xsd1:CreateDocumentResponse"/>
+   </message>
+   
+   <message name="DeleteDocumentRequest">
+      <part name="body" element="xsd1:DeleteDocumentRequest"/>
+   </message>
+
+   <message name="DeleteDocumentResponse">
+      <part name="body" element="xsd1:DeleteDocumentResponse"/>
+   </message>  
+
+   <message name="DocumentRequest">
+      <part name="body" element="xsd1:DocumentRequest"/>
+   </message>
+
+   <message name="DocumentResponse">
+      <part name="body" element="xsd1:DocumentResponse"/>
+   </message>
+   
+   <message name="MetadataByDocRequest">
+      <part name="body" element="xsd1:MetadataByDocRequest"/>
+   </message>
+
+   <message name="MetadataByDocResponse">
+      <part name="body" element="xsd1:MetadataByDocResponse"/>
+   </message>
+
+   <message name="AllDocumentVersionsByDocRequest">
+      <part name="body" element="xsd1:AllDocumentVersionsByDocRequest"/>
+   </message>
+
+   <message name="AllDocumentVersionsByDocResponse">
+      <part name="body" element="xsd1:AllDocumentVersionsByDocResponse"/>
+   </message>
+   
+   <message name="AllDocumentVersionsMetadataByDocRequest">
+      <part name="body" element="xsd1:AllDocumentVersionsMetadataByDocRequest"/>
+   </message>
+
+   <message name="AllDocumentVersionsMetadataByDocResponse">
+      <part name="body" element="xsd1:AllDocumentVersionsMetadataByDocResponse"/>
+   </message>  
+
+   <message name="DocumentsByMetadataRequest">
+      <part name="body" element="xsd1:DocumentsByMetadataRequest"/>
+   </message>
+
+   <message name="DocumentsByMetadataResponse">
+      <part name="body" element="xsd1:DocumentsByMetadataResponse"/>
+   </message>
+   
+   <message name="AllMetadataByMetadataRequest">
+      <part name="body" element="xsd1:AllMetadataByMetadataRequest"/>
+   </message>
+
+   <message name="AllMetadataByMetadataResponse">
+      <part name="body" element="xsd1:AllMetadataByMetadataResponse"/>
+   </message>   
+   
+   <portType name="DocumentoWSService">
+   
+	<operation name="createDocument">
+        <input  message="tns:CreateDocumentRequest" />
+        <output message="tns:CreateDocumentResponse" />
+    </operation>      
+      
+    <operation name="deleteDocument">
+		<input message="tns:DeleteDocumentRequest"/>
+		<output message="tns:DeleteDocumentResponse"/>
+	</operation> 
+
+	<operation name="getDocument">
+        <input  message="tns:DocumentRequest" />
+        <output message="tns:DocumentResponse" />
+    </operation>      
+      
+	<operation name="getMetadataByDoc">
+		<input message="tns:MetadataByDocRequest"/>
+		<output message="tns:MetadataByDocResponse"/>
+	</operation>  
+	
+	<operation name="getAllDocumentVersionsByDoc">
+        <input  message="tns:AllDocumentVersionsByDocRequest" />
+        <output message="tns:AllDocumentVersionsByDocResponse" />
+    </operation>      
+      
+	<operation name="getAllDocumentVersionsMetadataByDoc">
+		<input message="tns:AllDocumentVersionsMetadataByDocRequest"/>
+		<output message="tns:AllDocumentVersionsMetadataByDocResponse"/>
+	</operation> 
+
+	<operation name="findDocumentsByMetadata">
+		<input  message="tns:DocumentsByMetadataRequest" />
+		<output message="tns:DocumentsByMetadataResponse" />
+    </operation>      
+      
+	<operation name="getAllMetadataByMetadata">
+		<input message="tns:AllMetadataByMetadataRequest"/>
+		<output message="tns:AllMetadataByMetadataResponse"/>
+	</operation>      
+              
+   </portType>
+
+
+   <binding name="DocumentoWSHttpPBinding"
+            type="tns:DocumentoWSService">
+      <soap:binding style="document" 
+            transport="http://schemas.xmlsoap.org/soap/http"/>
+											
+      <operation name="createDocument">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+      </operation>  
+      
+      <operation name="deleteDocument">
+          <soap:operation soapAction=""/>
+          <input>
+              <soap:body use="literal"/>
+          </input>
+          <output>
+              <soap:body use="literal"/>
+          </output>
+      </operation>
+	  
+	   <operation name="getDocument">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+      </operation>  
+      
+      <operation name="getMetadataByDoc">
+          <soap:operation soapAction=""/>
+          <input>
+              <soap:body use="literal"/>
+          </input>
+          <output>
+              <soap:body use="literal"/>
+          </output>
+      </operation>
+	  
+	     <operation name="getAllDocumentVersionsByDoc">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+      </operation>  
+      
+      <operation name="getAllDocumentVersionsMetadataByDoc">
+          <soap:operation soapAction=""/>
+          <input>
+              <soap:body use="literal"/>
+          </input>
+          <output>
+              <soap:body use="literal"/>
+          </output>
+      </operation>
+	  
+	   <operation name="findDocumentsByMetadata">
+         <soap:operation soapAction=""/>
+         <input>
+            <soap:body use="literal"/>
+         </input>
+         <output>
+            <soap:body use="literal"/>
+         </output>
+      </operation>  
+      
+      <operation name="getAllMetadataByMetadata">
+          <soap:operation soapAction=""/>
+          <input>
+              <soap:body use="literal"/>
+          </input>
+          <output>
+              <soap:body use="literal"/>
+          </output>
+      </operation>
+      
+   </binding>
+
+
+ <service name="DocumentoWS">
+		<port name="DocumentoServiceSOAP" binding="tns:DocumentoWSHttpPBinding">
+			<soap:address location="/DocumentoWS" />
+		</port>
+	</service>
+</definitions>
+

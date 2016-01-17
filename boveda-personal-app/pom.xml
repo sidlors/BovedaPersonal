@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>mx.gob.imss.cit.bp</groupId>
+		<artifactId>boveda-personal</artifactId>
+		<version>2.0</version>
+	</parent>
+
+	<artifactId>boveda-personal-app</artifactId>
+	<version>${project.parent.version}</version>
+	<packaging>ear</packaging>
+	<name>Boveda personal - App</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>mx.gob.imss.cit.bp</groupId>
+			<artifactId>boveda-personal-services</artifactId>
+			<version>${project.parent.version}</version>
+			<type>ejb</type>
+		</dependency>
+         <dependency>
+			<groupId>mx.gob.imss.cit.bp</groupId>
+			<artifactId>boveda-personal-integration</artifactId>
+			<version>${project.parent.version}</version>
+			<type>ejb</type>
+			<exclusions>
+				<exclusion>
+					<groupId>mx.gob.imss.cit.bp</groupId>
+					<artifactId>boveda-personal-services</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>mx.gob.imss.cit.bp</groupId>
+			<artifactId>boveda-personal-ws</artifactId>
+			<version>${project.parent.version}</version>
+			<type>war</type>
+			<exclusions>
+				<exclusion>
+					<groupId>mx.gob.imss.cit.bp</groupId>
+					<artifactId>boveda-personal-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>${maven-ear-plugin.version}</version>
+				<configuration>					
+					<earSourceDirectory>src/main/resources</earSourceDirectory>
+					<defaultLibBundleDir>APP-INF/lib</defaultLibBundleDir>
+					<generateApplicationXml>false</generateApplicationXml>
+					<modules>
+						<ejbModule>
+							<groupId>mx.gob.imss.cit.bp</groupId>
+							<artifactId>boveda-personal-services</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>mx.gob.imss.cit.bp</groupId>
+							<artifactId>boveda-personal-integration</artifactId>
+						</ejbModule>
+						<webModule>
+							<groupId>mx.gob.imss.cit.bp</groupId>
+							<artifactId>boveda-personal-ws</artifactId>
+							<contextRoot>boveda-personal-ws</contextRoot>
+						</webModule>
+
+					</modules>
+
+				</configuration>
+			</plugin>
+		</plugins>
+		
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-ear-plugin</artifactId>
+										<versionRange>[2.6,)</versionRange>
+										<goals>
+											<goal>generate-application-xml</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
+	</build>
+	
+</project>

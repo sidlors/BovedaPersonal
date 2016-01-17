@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+	<parent>
+  		<groupId>mx.gob.imss.cit.bp</groupId>
+    	<artifactId>boveda-personal</artifactId>
+    	<version>2.0</version>
+  	</parent>
+  	<artifactId>boveda-personal-integration-api</artifactId>
+  	<version>${project.parent.version}</version>
+  	<name>Boveda personal - Integration - API</name>
+  	<packaging>jar</packaging>
+  
+  	<dependencies>    
+    	<dependency>
+    		<groupId>javax</groupId>
+      		<artifactId>javaee-api</artifactId>
+      		<version>${java-ee.version}</version>
+      		<scope>provided</scope>
+    	</dependency>
+    
+		<dependency>
+			<groupId>mx.gob.imss.cit.bp</groupId>
+			<artifactId>boveda-personal-model</artifactId>
+			<version>${project.parent.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax</groupId>
+					<artifactId>javaee-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> 
+  </dependencies>
+</project>

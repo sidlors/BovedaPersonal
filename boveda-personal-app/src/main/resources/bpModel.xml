@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Definition of new Model -->
+
+<!-- The important part here is the name - Note: the use of the my: namespace
+     which is defined further on in the document -->
+<model name="bp:bovedaPersonalModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <!-- Optional meta-data about the model -->   
+   <description>Boveda Personal IMSS </description>
+   <author></author>
+   <version>1.0</version>
+
+   <!-- Imports are required to allow references to definitions in other models -->   
+   <imports>
+   	  <!-- Import Alfresco Dictionary Definitions -->
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+   </imports>
+
+   <!-- Introduction of new namespaces defined by this model -->
+   <!-- NOTE: The following namespace my.new.model should be changed to reflect your own namespace -->
+   <namespaces>
+      <namespace uri="boveda.personal.bp.imss" prefix="bp"/>
+   </namespaces>
+	<aspects>
+		<aspect name="bp:tramite">
+			<title>Documento Boveda Personal IMSS</title>
+			<properties>
+				<property name="bp:org">
+					<type>d:text</type>
+				</property>
+				<property name="bp:zona">
+					<type>d:text</type>
+				</property>
+				<property name="bp:tramite">
+					<type>d:text</type>
+				</property>
+				<property name="bp:fecha">
+					<type>d:text</type>
+				</property>
+				<property name="bp:folio">
+					<type>d:text</type>
+				</property>
+				<property name="bp:custom_id">
+					<type>d:text</type>
+				</property>
+				<property name="bp:borrado">
+					<type>d:boolean</type>
+				</property>
+				<property name="bp:actors">		
+					<type>d:text</type>
+					<multiple>true</multiple>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="bp:usuario">
+			<title>Documento Boveda Personal IMSS</title>
+			<properties>
+				<property name="bp:user_org">
+					<type>d:text</type>
+				</property>
+				<property name="bp:user_zona">
+					<type>d:text</type>
+				</property>
+				<property name="bp:user_tipo_id">
+					<type>d:text</type>
+				</property>
+				<property name="bp:user_id">
+					<type>d:text</type>
+				</property>
+				<property name="bp:user_rol">
+					<type>d:text</type>
+				</property>
+			</properties>
+		</aspect>
+   </aspects>
+</model>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    version="1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://ws.bp.cit.imss.gob.mx/"
+    xmlns="http://ws.bp.cit.imss.gob.mx/">
+
+
+    <!-- Tipos complementarios -->
+	
+		<xs:complexType name="Tramite">
+        <xs:sequence>
+			<xs:element name="org"      			type="xs:string" maxOccurs="1" minOccurs="1"/>
+			<xs:element name="zona"     			type="xs:string" maxOccurs="1" minOccurs="1"/>
+            <xs:element name="tramite"       		type="xs:string" maxOccurs="1" minOccurs="1"/>
+            <xs:element name="fecha"        		type="xs:string" maxOccurs="1" minOccurs="1"/>
+			<xs:element name="instancia"        	type="xs:boolean" maxOccurs="1" minOccurs="1"/>
+        </xs:sequence>               
+    </xs:complexType>
+	
+	<xs:complexType name="BaseRequest">
+        <xs:sequence>
+			<xs:element name="Tramite"      type="Tramite" 	  maxOccurs="1" minOccurs="1"/>
+        </xs:sequence>               
+    </xs:complexType>
+
+    <xs:complexType name="BaseResponse">
+        <xs:sequence>
+			<xs:element name="Tramite"      		type="Tramite" 	  maxOccurs="1" minOccurs="0"/>
+			<xs:element name="excepcionCodigo"      type="xs:int" 	  maxOccurs="1" minOccurs="0"/>
+			<xs:element name="excepcionMensaje"     type="xs:string"  maxOccurs="1" minOccurs="0"/>
+            <xs:element name="excepcionCausa"       type="xs:string"  maxOccurs="1" minOccurs="0"/>
+            <xs:element name="exitoso"        		type="xs:boolean" maxOccurs="1" minOccurs="1"/>
+        </xs:sequence>               
+    </xs:complexType>
+	
+	<xs:complexType name="BaseObject">
+        <xs:sequence>
+			<xs:element name="name"     			type="xs:string" maxOccurs="1" minOccurs="1"/>
+            <xs:element name="isFolder"       		type="xs:boolean" maxOccurs="1" minOccurs="1"/>
+			<xs:element name="relativePath"       	type="xs:string" maxOccurs="1" minOccurs="0"/>
+			<xs:element name="children"				type="BaseObject" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>               
+    </xs:complexType>
+	
+	<xs:complexType name="Document">
+		 <xs:complexContent>
+			<xs:extension base="BaseObject">
+				<xs:sequence>
+					<xs:element name="ext"      				type="xs:string" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="content"       			type="xs:hexBinary" maxOccurs="1" minOccurs="0"/>
+					<xs:element name="isDeleted"        		type="xs:boolean" maxOccurs="1" minOccurs="1"/>
+				</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>	
+    </xs:complexType>
+	
+	<xs:complexType name="Actor">
+        <xs:sequence>
+			<xs:element name="org"     				type="xs:string" maxOccurs="1" minOccurs="1"/>
+            <xs:element name="zona"       			type="xs:string" maxOccurs="1" minOccurs="1"/>
+			<xs:element name="tipoId"				type="xs:string" maxOccurs="1" minOccurs="1"/>
+			<xs:element name="id"					type="xs:string" maxOccurs="1" minOccurs="1"/>
+			<xs:element name="rol"					type="xs:string" maxOccurs="1" minOccurs="1"/>
+			<xs:element name="isOwner"	     		type="xs:boolean" maxOccurs="1" minOccurs="0"/>
+        </xs:sequence>               
+    </xs:complexType>
+	
+	<xs:complexType name="Metadata">
+        <xs:sequence>
+			<xs:element name="actores"      			type="xs:string" maxOccurs="unbounded" minOccurs="1"/>
+			<xs:element name="fechaCreacion"     		type="xs:string" maxOccurs="1" minOccurs="1"/>
+            <xs:element name="fechaModificacion"       	type="xs:string" maxOccurs="1" minOccurs="1"/>
+            <xs:element name="version"        			type="xs:string" maxOccurs="1" minOccurs="1"/>
+        </xs:sequence>               
+    </xs:complexType>
+        
+    <!-- TIPOS PARA LAS OPERACIONES DE BOVEDA DIGITAL -->
+	
+    <!-- Solicitud createFolder -->
+    <xs:element name="CreateDocumentRequest" type="CreateDocumentRequest"/>
+    <xs:complexType name="CreateDocumentRequest">
+        <xs:complexContent>
+			<xs:extension base="BaseRequest">
+				<xs:sequence>
+					<xs:element name="Tramite"      				type="Tramite" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="Document"      				type="Document" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="Actor"      					type="Actor" maxOccurs="1" minOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+         
+    <!-- Respuesta createFolder -->
+    <xs:element name="CreateDocumentResponse" type="CreateDocumentResponse"/>
+    <xs:complexType name="CreateDocumentResponse">
+		<xs:sequence>
+			<xs:element name="Response"					type="BaseResponse" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+    </xs:complexType>     
+    
+    <!-- Solicitud de descifrado de documento -->
+    <xs:element name="DeleteDocumentRequest" type="DeleteDocumentRequest"/>
+    <xs:complexType name="DeleteDocumentRequest">
+         <xs:complexContent>
+			<xs:extension base="BaseRequest">
+				<xs:sequence>
+					<xs:element name="Actor"      		type="Actor" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="Document"      	type="Document" maxOccurs="1" minOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		  </xs:complexContent>
+    </xs:complexType>
+         
+    <!-- Respuesta de Registro -->
+    <xs:element name="DeleteDocumentResponse" type="DeleteDocumentResponse"/>
+    <xs:complexType name="DeleteDocumentResponse">
+		<xs:sequence>
+			<xs:element name="Response"      			type="BaseResponse" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType> 
+
+    <!-- Solicitud createFolder -->
+    <xs:element name="DocumentRequest" type="DocumentRequest"/>
+    <xs:complexType name="DocumentRequest">
+       <xs:complexContent>
+			<xs:extension base="BaseRequest">
+				<xs:sequence>
+					<xs:element name="Actor"      					type="Actor" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="Document"      				type="Document" maxOccurs="1" minOccurs="1"/>
+				</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+         
+    <!-- Respuesta createFolder -->
+    <xs:element name="DocumentResponse" type="DocumentResponse"/>
+    <xs:complexType name="DocumentResponse">
+        <xs:complexContent>
+			<xs:extension base="BaseResponse">
+				<xs:sequence>
+					<xs:element name="Document"      				type="Document" maxOccurs="1" minOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>     
+
+    <!-- Solicitud de descifrado de documento -->
+    <xs:element name="MetadataByDocRequest" type="MetadataByDocRequest"/>
+    <xs:complexType name="MetadataByDocRequest">
+			<xs:complexContent>
+				<xs:extension base="BaseRequest">
+					<xs:sequence>
+						<xs:element name="Actor"      					type="Actor" maxOccurs="1" minOccurs="1"/>
+						<xs:element name="Document"      				type="Document" maxOccurs="1" minOccurs="1"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+    </xs:complexType>
+         
+    <!-- Respuesta de Registro -->
+     <xs:element name="MetadataByDocResponse" type="MetadataByDocResponse"/>
+    <xs:complexType name="MetadataByDocResponse">
+         <xs:complexContent>
+			<xs:extension base="BaseResponse">
+				<xs:sequence>
+					<xs:element name="Metadata"      				type="Metadata" maxOccurs="1" minOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+
+	
+    <!-- Solicitud createFolder -->
+    <xs:element name="AllDocumentVersionsByDocRequest" type="AllDocumentVersionsByDocRequest"/>
+    <xs:complexType name="AllDocumentVersionsByDocRequest">
+        <xs:complexContent>
+			<xs:extension base="BaseRequest">
+				<xs:sequence>
+					<xs:element name="Actor"      					type="Actor" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="Document"      				type="Document" maxOccurs="1" minOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+         
+    <!-- Respuesta createFolder -->
+    <xs:element name="AllDocumentVersionsByDocResponse" type="AllDocumentVersionsByDocResponse"/>
+    <xs:complexType name="AllDocumentVersionsByDocResponse">
+        <xs:complexContent>
+			<xs:extension base="BaseResponse">
+				<xs:sequence>
+					<xs:element name="Document"      				type="Document" maxOccurs="unbounded" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>     
+    
+    <!-- Solicitud de descifrado de documento -->
+    <xs:element name="AllDocumentVersionsMetadataByDocRequest" type="AllDocumentVersionsMetadataByDocRequest"/>
+    <xs:complexType name="AllDocumentVersionsMetadataByDocRequest">
+         <xs:complexContent>
+			<xs:extension base="BaseRequest">
+				<xs:sequence>
+					<xs:element name="Actor"      				type="Actor" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="Document"      			type="Document" maxOccurs="unbounded" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		  </xs:complexContent>
+    </xs:complexType>
+         
+    <!-- Respuesta de Registro -->
+    <xs:element name="AllDocumentVersionsMetadataByDocResponse" type="AllDocumentVersionsMetadataByDocResponse"/>
+    <xs:complexType name="AllDocumentVersionsMetadataByDocResponse">
+       <xs:complexContent>
+			<xs:extension base="BaseResponse">
+				<xs:sequence>
+					<xs:element name="Document"      				type="Document" maxOccurs="unbounded" minOccurs="0"/>
+					<xs:element name="Metadata"      				type="Metadata" maxOccurs="unbounded" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType> 
+
+    <!-- Solicitud createFolder -->
+    <xs:element name="DocumentsByMetadataRequest" type="DocumentsByMetadataRequest"/>
+    <xs:complexType name="DocumentsByMetadataRequest">
+       <xs:complexContent>
+			<xs:extension base="BaseRequest">
+				<xs:sequence>
+					<xs:element name="Actor"      					type="Actor" maxOccurs="1" minOccurs="1"/>
+					<xs:element name="Metadata"      				type="Metadata" maxOccurs="1" minOccurs="1"/>
+				</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+         
+    <!-- Respuesta createFolder -->
+    <xs:element name="DocumentsByMetadataResponse" type="DocumentsByMetadataResponse"/>
+    <xs:complexType name="DocumentsByMetadataResponse">
+          <xs:complexContent>
+			<xs:extension base="BaseResponse">
+				<xs:sequence>
+					<xs:element name="Document"      				type="Document" maxOccurs="unbounded" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>     
+
+    <!-- Solicitud de descifrado de documento -->
+    <xs:element name="AllMetadataByMetadataRequest" type="AllMetadataByMetadataRequest"/>
+    <xs:complexType name="AllMetadataByMetadataRequest">
+			<xs:complexContent>
+				<xs:extension base="BaseRequest">
+					<xs:sequence>
+						<xs:element name="Actor"      				type="Actor" maxOccurs="1" minOccurs="1"/>
+						<xs:element name="Metadata"      			type="Metadata" maxOccurs="1" minOccurs="1"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+    </xs:complexType>
+         
+    <!-- Respuesta de Registro -->
+     <xs:element name="AllMetadataByMetadataResponse" type="AllMetadataByMetadataResponse"/>
+    <xs:complexType name="AllMetadataByMetadataResponse">
+          <xs:complexContent>
+			<xs:extension base="BaseResponse">
+				<xs:sequence>
+					<xs:element name="Document"      				type="Document" maxOccurs="unbounded" minOccurs="0"/>
+					<xs:element name="Metadata"      				type="Metadata" maxOccurs="unbounded" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>  
+	
+	 <!-- Solicitud de crear una relación entre documentos -->
+	<xs:element name="CreateRelationshipRequest" type="CreateRelationshipRequest"/>
+		<xs:complexType name="CreateRelationshipRequest">
+			<xs:sequence>
+				<xs:element name="Actor"      						type="Actor" maxOccurs="1" minOccurs="1"/>
+				<xs:element name="TramiteSource"      				type="Tramite" maxOccurs="1" minOccurs="1"/>
+				<xs:element name="DocumentSource"      				type="Document" maxOccurs="1" minOccurs="1"/>
+				<xs:element name="TramiteTarget"      				type="Tramite" maxOccurs="1" minOccurs="1"/>
+				<xs:element name="DocumentTarge"      				type="Document" maxOccurs="1" minOccurs="1"/>	
+			</xs:sequence>
+    </xs:complexType>
+         
+    <!-- Respuesta a crear una relación -->
+    <xs:element name="CreateRelationshipResponse" type="CreateRelationshipResponse"/>
+    <xs:complexType name="CreateRelationshipResponse">
+		<xs:sequence>
+			<xs:element name="Response"					type="BaseResponse" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+    </xs:complexType>
+	
+	 <!-- Solicitud de gregar actor a documento -->
+    <xs:element name="AddActorRequest" type="AddActorRequest"/>
+    <xs:complexType name="AddActorRequest">
+			<xs:complexContent>
+				<xs:extension base="BaseRequest">
+					<xs:sequence>
+						<xs:element name="Actor"      				type="Actor" maxOccurs="1" minOccurs="1"/>
+						<xs:element name="Document"      			type="Document" maxOccurs="unbounded" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+    </xs:complexType>
+         
+    <!-- Respuesta de Agregar actor a documento -->
+     <xs:element name="AddActorResponse" type="AddActorResponse"/>
+    <xs:complexType name="AddActorResponse">
+          <xs:sequence>
+			<xs:element name="Response"					type="BaseResponse" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>
+    </xs:complexType>
+</xs:schema>
