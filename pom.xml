@@ -82,7 +82,7 @@
 		<certum.commons.lang.version>2.0.7</certum.commons.lang.version>
 		<!-- Librerías de Apache -->
 		<commons-lang.version>2.6</commons-lang.version>
-		<commons-collections.version>3.2.1</commons-collections.version>
+		<commons-collections.version>3.2.2</commons-collections.version>
 		<commons-configuration.version>1.7</commons-configuration.version>
 		<commons-email.version>1.2</commons-email.version>
 		<commons-fileupload.version>1.2.2</commons-fileupload.version>
